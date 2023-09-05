@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions: read-all
     needs:
-      - tidy_and_test
+      - execute_test
     if: ${{ always() }}
     steps:
       - uses: cgrindel/gha_join_jobs@v1
