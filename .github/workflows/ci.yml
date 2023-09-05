@@ -1,0 +1,30 @@
+name: Continuous Integration
+"on":
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  tidy_and_test:
+    runs-on: macos-13
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/set_up_macos
+        with:
+          repo_name: pinochle-score
+          xcode_version: "14.2"
+      - name: Execute Test
+        shell: bash
+        run: |
+          bazelisk test //e2e:sample_repo_test_bazel_5_3_2
+
+  all_ci_tests:
+    runs-on: ubuntu-latest
+    permissions: read-all
+    needs:
+      - tidy_and_test
+    if: ${{ always() }}
+    steps:
+      - uses: cgrindel/gha_join_jobs@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
