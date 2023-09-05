@@ -5,7 +5,7 @@ name: Continuous Integration
       - master
 
 jobs:
-  tidy_and_test:
+  execute_test:
     runs-on: macos-13
     steps:
       - uses: actions/checkout@v3
