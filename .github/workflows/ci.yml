@@ -9,10 +9,9 @@ jobs:
     runs-on: macos-13
     steps:
       - uses: actions/checkout@v3
-      - uses: ./.github/actions/set_up_macos
+      - uses: maxim-lobanov/setup-xcode@v1
         with:
-          repo_name: pinochle-score
-          xcode_version: "14.2"
+          xcode-version: "14.2"
       - name: Execute Test
         shell: bash
         run: |
